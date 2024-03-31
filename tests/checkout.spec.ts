@@ -12,7 +12,7 @@ import * as testData from '../data/test.json';
 
 test.describe(`Checkout`, () => {
   
-  test('should checkout multiple items', async ({ page }) => {
+  test('should be able to checkout multiple items', async ({ page }) => {
 
     const loginPage: LoginPage = new LoginPage(page);
     const productsPage: ProductsPage = new ProductsPage(page);
