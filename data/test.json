@@ -1,0 +1,16 @@
+{
+    "Items": [
+        "Sauce Labs Bike Light", 
+        "Sauce Labs Backpack", 
+        "Test.allTheThings() T-Shirt (Red)"
+    ],
+    "Checkout": {
+        "FirstName": "John",
+        "LastName": "Doe",
+        "PostalOrZipCode": "1000"
+    },
+    "CheckoutCompleteMessage": {
+        "Header": "Thank you for your order!",
+        "Text": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+    }
+}
