@@ -22,7 +22,7 @@ export class LoginPage {
     }
 
     async goto() {
-        await this.page.goto('https://www.saucedemo.com/');
+        await this.page.goto('/');
     }
 
     async performLogin(username: string, password: string, isValidLogin: boolean = true) {
