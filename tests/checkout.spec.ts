@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 import { LoginPage } from '../pages/login';
 import { ProductsPage } from '../pages/products';
@@ -21,18 +21,23 @@ test.describe(`Checkout`, () => {
     const checkoutOverviewPage: CheckoutOverviewPage = new CheckoutOverviewPage(page);
     const checkoutCompletePage: CheckoutCompletePage = new CheckoutCompletePage(page);
 
+    // Test data below
+    // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
     const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
 
-    const items: string | string[] = testData.Items;
+    // Items to add
+    const items: string | string[] = testData.Test1.ItemsToAdd;
 
-    const firstName: string = testData.Checkout.FirstName;
-    const lastName: string = testData.Checkout.LastName;
-    const postalOrZipCode: string = testData.Checkout.PostalOrZipCode;
+    // Checkout Information
+    const firstName: string = testData.Test1.CheckoutInformation.FirstName;
+    const lastName: string = testData.Test1.CheckoutInformation.LastName;
+    const postalOrZipCode: string = testData.Test1.CheckoutInformation.PostalOrZipCode;
 
-    const expectedCompleteHeader: string = testData.CheckoutCompleteMessage.Header;
-    const expectedCompleteText: string = testData.CheckoutCompleteMessage.Text
+    // Expected messages in Complete Checkout page
+    const expectedCompleteHeader: string = testData.Test1.ExpectedCheckoutCompleteMessage.Header;
+    const expectedCompleteText: string = testData.Test1.ExpectedCheckoutCompleteMessage.Text;
   
     await loginPage.goto();
     await loginPage.performLogin(username, password, isValidLogin);
@@ -46,7 +51,57 @@ test.describe(`Checkout`, () => {
     await checkoutInformationPage.performFillUpCheckoutInformation(firstName, lastName, postalOrZipCode);
     await checkoutInformationPage.navigateToCheckoutOverViewPage();
 
-    await checkoutOverviewPage.checkIfAddedItemsExist(items);
+    await checkoutOverviewPage.checkIfItemsExist(items);
+    await checkoutOverviewPage.navigateToCheckoutCompletePage();
+
+    await checkoutCompletePage.assertCheckoutIsComplete(expectedCompleteHeader, expectedCompleteText);
+    await checkoutCompletePage.navigateToProductsPage();
+  });
+
+  test('should be able to remove items in shopping cart and then checkout the remaining items', async ({ page }) => {
+
+    const loginPage: LoginPage = new LoginPage(page);
+    const productsPage: ProductsPage = new ProductsPage(page);
+    const cartPage: CartPage = new CartPage(page);
+    const checkoutInformationPage: CheckoutInformationPage = new CheckoutInformationPage(page);
+    const checkoutOverviewPage: CheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const checkoutCompletePage: CheckoutCompletePage = new CheckoutCompletePage(page);
+    
+    // Test data below
+    // Login
+    const username: string = loginData.ValidScenario.Username;
+    const password: string = loginData.ValidScenario.Password;
+    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
+
+    // Items to add
+    const items: string | string[] = testData.Test2.ItemsToAdd;
+    const removeItems: string | string[] = testData.Test2.ItemsToRemove;
+    const remainingItems: string[] = items.filter(item => !removeItems.includes(item));
+
+    // Checkout Information
+    const firstName: string = testData.Test2.CheckoutInformation.FirstName;
+    const lastName: string = testData.Test2.CheckoutInformation.LastName;
+    const postalOrZipCode: string = testData.Test2.CheckoutInformation.PostalOrZipCode;
+
+    // Expected messages in Complete Checkout page
+    const expectedCompleteHeader: string = testData.Test2.ExpectedCheckoutCompleteMessage.Header;
+    const expectedCompleteText: string = testData.Test2.ExpectedCheckoutCompleteMessage.Text;
+  
+    await loginPage.goto();
+    await loginPage.performLogin(username, password, isValidLogin);
+
+    await productsPage.performAddItemsToCart(items);
+    await productsPage.navigateToCartPage();
+
+    await cartPage.checkIfAddedItemsExist(items);
+    await cartPage.removeAddedItemsInTheCart(removeItems);
+    await cartPage.checkIfAddedItemsExist(remainingItems);
+    await cartPage.navigateToCheckoutInformationPage();
+
+    await checkoutInformationPage.performFillUpCheckoutInformation(firstName, lastName, postalOrZipCode);
+    await checkoutInformationPage.navigateToCheckoutOverViewPage();
+
+    await checkoutOverviewPage.checkIfItemsExist(remainingItems);
     await checkoutOverviewPage.navigateToCheckoutCompletePage();
 
     await checkoutCompletePage.assertCheckoutIsComplete(expectedCompleteHeader, expectedCompleteText);

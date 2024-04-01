@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login';
 import * as loginData from '../data/login.json';
 
+// should be able to remove items in shopping cart and then checkout the remaining items
 
 test.describe(`Login`, () => {
   
