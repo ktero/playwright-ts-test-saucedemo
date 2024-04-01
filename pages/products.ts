@@ -1,20 +1,18 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { NavigationBar } from '../components/navigation-bar';
 
-export class ProductsPage {
+export class ProductsPage extends NavigationBar {
     readonly page: Page;
 
     // Define locators
-    readonly productSortContainer: Locator;
     readonly productItem: Locator;
-    readonly shoppingCartLink: Locator;
 
     constructor(page: Page) {
+        super(page);
         this.page = page;
 
         // Initialize locators
-        this.productSortContainer = this.page.locator('[data-test="product-sort-container"]');
         this.productItem = this.page.locator('[data-test="inventory-item"]');
-        this.shoppingCartLink = this.page.locator('[data-test="shopping-cart-link"]');
     }
 
     async performAddItemsToCart(itemToAdd: string | string[]) {
@@ -29,20 +27,11 @@ export class ProductsPage {
             await this.addItemToCart(itemName);
             itemCounter++;
             // Assert total number of items added in the shopping cart
-            await expect(this.shoppingCartLink).toHaveText(`${itemCounter}`);
+            await this.assertNumberBesideCartIcon(itemCounter);
         }
-    }
-
-    async navigateToCartPage() {
-        await this.clickShoppingCart();
-        await expect(this.page).toHaveURL(/.*cart.html/);
     }
 
     private async addItemToCart(itemName: string) {
         await this.productItem.filter({ hasText: itemName }).getByRole('button', { name: 'Add to cart' }).click();
-    }
-
-    private async clickShoppingCart() {
-        await this.shoppingCartLink.click(); 
     }
 }

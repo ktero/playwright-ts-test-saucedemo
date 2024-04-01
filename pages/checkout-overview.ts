@@ -15,7 +15,7 @@ export class CheckoutOverviewPage {
         this.finishButton = this.page.locator('[data-test="finish"]');
     }
 
-    async checkIfAddedItemsExist(checkItems: string | string[]) {
+    async checkIfItemsExist(checkItems: string | string[]) {
 
         let items: string[] = typeof checkItems === 'string' ? [checkItems] : [...checkItems];
         let itemName: string;
