@@ -8,6 +8,7 @@ export class CheckoutInformationPage {
     readonly lastNameInputText: Locator;
     readonly postalOrZipCodeInputText: Locator;
     readonly continueButton: Locator;
+    readonly errorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +18,7 @@ export class CheckoutInformationPage {
         this.lastNameInputText = this.page.locator('[data-test="lastName"]');
         this.postalOrZipCodeInputText = this.page.locator('[data-test="postalCode"]');
         this.continueButton = this.page.locator('[data-test="continue"]');
+        this.errorMessage = this.page.locator('[data-test="error"]');
     }
 
     async performFillUpCheckoutInformation(firstName: string, lastName: string, postalOrZipCode: string) {
@@ -25,9 +27,15 @@ export class CheckoutInformationPage {
         await this.enterPostalOrZipCode(postalOrZipCode);
     }
 
-    async navigateToCheckoutOverViewPage() {
+    async navigateToCheckoutOverViewPage(checkCurrentPageAfterClickingContinueButton: boolean = true) {
         await this.clickContinueButton();
-        await expect(this.page).toHaveURL(/.*checkout-step-two.html/);
+        if (checkCurrentPageAfterClickingContinueButton) {
+            await expect(this.page).toHaveURL(/.*checkout-step-two.html/);
+        }
+    }
+
+    async assertErrorMessage(expectedErrorMessage: string) {
+        await expect(this.errorMessage).toHaveText(expectedErrorMessage);
     }
 
     private async enterFirstName(firstName: string) {
