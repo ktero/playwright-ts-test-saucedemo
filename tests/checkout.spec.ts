@@ -108,5 +108,51 @@ test.describe(`Checkout`, () => {
     await checkoutCompletePage.navigateToProductsPage();
   });
 
+  test('should be able to checkout item if added from item page', async ({ page }) => {
+    const loginPage: LoginPage = new LoginPage(page);
+    const productsPage: ProductsPage = new ProductsPage(page);
+    const cartPage: CartPage = new CartPage(page);
+    const checkoutInformationPage: CheckoutInformationPage = new CheckoutInformationPage(page);
+    const checkoutOverviewPage: CheckoutOverviewPage = new CheckoutOverviewPage(page);
+    const checkoutCompletePage: CheckoutCompletePage = new CheckoutCompletePage(page);
+    
+    // Test data below
+    // Login
+    const username: string = loginData.ValidScenario.Username;
+    const password: string = loginData.ValidScenario.Password;
+    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
+
+    // Items to add
+    const items: string | string[] = testData.Test3.ItemsToAdd;
+
+    // Checkout Information
+    const firstName: string = testData.Test3.CheckoutInformation.FirstName;
+    const lastName: string = testData.Test3.CheckoutInformation.LastName;
+    const postalOrZipCode: string = testData.Test3.CheckoutInformation.PostalOrZipCode;
+
+    // Expected messages in Complete Checkout page
+    const expectedCompleteHeader: string = testData.Test3.ExpectedCheckoutCompleteMessage.Header;
+    const expectedCompleteText: string = testData.Test3.ExpectedCheckoutCompleteMessage.Text;
+
+    await loginPage.goto();
+    await loginPage.performLogin(username, password, isValidLogin);
+
+    await productsPage.performAddItemsToCart(items, true);
+    await productsPage.navigateToCartPage();
+
+    await cartPage.checkIfAddedItemsExist(items);
+    await cartPage.navigateToCheckoutInformationPage();
+
+    await checkoutInformationPage.performFillUpCheckoutInformation(firstName, lastName, postalOrZipCode);
+    await checkoutInformationPage.navigateToCheckoutOverViewPage();
+
+    await checkoutOverviewPage.checkIfItemsExist(items);
+    await checkoutOverviewPage.navigateToCheckoutCompletePage();
+
+    await checkoutCompletePage.assertCheckoutIsComplete(expectedCompleteHeader, expectedCompleteText);
+    await checkoutCompletePage.navigateToProductsPage();
+    
+  });
+
 });
 

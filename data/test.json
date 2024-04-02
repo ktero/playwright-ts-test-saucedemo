@@ -33,5 +33,19 @@
             "Header": "Thank you for your order!",
             "Text": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
         }
+    },
+    "Test3": {
+        "ItemsToAdd": [
+            "Sauce Labs Bike Light"
+        ],
+        "CheckoutInformation": {
+            "FirstName": "John",
+            "LastName": "Doe",
+            "PostalOrZipCode": "1000"
+        },
+        "ExpectedCheckoutCompleteMessage": {
+            "Header": "Thank you for your order!",
+            "Text": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+        }
     }
 }
