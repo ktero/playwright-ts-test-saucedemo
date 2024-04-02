@@ -154,5 +154,59 @@ test.describe(`Checkout`, () => {
     
   });
 
+  test('should not be able to checkout if checkout information is not given', async ({ page }) => {
+
+    const loginPage: LoginPage = new LoginPage(page);
+    const productsPage: ProductsPage = new ProductsPage(page);
+    const cartPage: CartPage = new CartPage(page);
+    const checkoutInformationPage: CheckoutInformationPage = new CheckoutInformationPage(page);
+
+    // Test data below
+    // Login
+    const username: string = loginData.ValidScenario.Username;
+    const password: string = loginData.ValidScenario.Password;
+    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
+
+    // Items to add
+    const items: string | string[] = testData.Test1.ItemsToAdd;
+
+    // Checkout Information
+    const firstName: string = testData.Test1.CheckoutInformation.FirstName;
+    const lastName: string = testData.Test1.CheckoutInformation.LastName;
+    const postalOrZipCode: string = testData.Test1.CheckoutInformation.PostalOrZipCode;
+
+    // Expected checkout information error messages
+    const noFill: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoFill;
+    const noFirstName: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoFirstName;
+    const noLastName: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoLastName;
+    const noPostalOrZipCode: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoPostalOrZipCode;
+  
+    await loginPage.goto();
+    await loginPage.performLogin(username, password, isValidLogin);
+
+    await productsPage.performAddItemsToCart(items);
+    await productsPage.navigateToCartPage();
+
+    await cartPage.checkIfAddedItemsExist(items);
+    await cartPage.navigateToCheckoutInformationPage();
+
+    // Test when nothing is entered
+    await checkoutInformationPage.performFillUpCheckoutInformation("", "", "");
+    await checkoutInformationPage.navigateToCheckoutOverViewPage(false);
+    await checkoutInformationPage.assertErrorMessage(noFill);
+    // Test when first name is not entered
+    await checkoutInformationPage.performFillUpCheckoutInformation("", lastName, postalOrZipCode);
+    await checkoutInformationPage.navigateToCheckoutOverViewPage(false);
+    await checkoutInformationPage.assertErrorMessage(noFirstName);
+    // Test when last name is not entered
+    await checkoutInformationPage.performFillUpCheckoutInformation(firstName, "", postalOrZipCode);
+    await checkoutInformationPage.navigateToCheckoutOverViewPage(false);
+    await checkoutInformationPage.assertErrorMessage(noLastName);
+    // Test when postal or zip code is not entered
+    await checkoutInformationPage.performFillUpCheckoutInformation(firstName, lastName, "");
+    await checkoutInformationPage.navigateToCheckoutOverViewPage(false);
+    await checkoutInformationPage.assertErrorMessage(noPostalOrZipCode);
+  });
+
 });
 
