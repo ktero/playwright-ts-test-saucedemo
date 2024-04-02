@@ -47,5 +47,22 @@
             "Header": "Thank you for your order!",
             "Text": "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
         }
+    },
+    "Test4": {
+        "ItemsToAdd": [
+            "Sauce Labs Bike Light",
+            "Sauce Labs Backpack"
+        ],
+        "CheckoutInformation": {
+            "FirstName": "John",
+            "LastName": "Doe",
+            "PostalOrZipCode": "1000"
+        },
+        "ExpectedCheckoutInformationErrorMessages": {
+            "NoFill": "Error: First Name is required",
+            "NoFirstName": "Error: First Name is required",
+            "NoLastName": "Error: Last Name is required",
+            "NoPostalOrZipCode": "Error: Postal Code is required"
+        }
     }
 }
