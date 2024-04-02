@@ -7,7 +7,8 @@
     "test": "playwright test",
     "test-chromium": "npx playwright test --project=chromium",
     "test-chromium-trace-on": "npx playwright test --project=chromium --trace on",
-    "show-report": "npx playwright show-report"
+    "show-report": "npx playwright show-report",
+    "test-ui": "npx playwright test --ui"
   },
   "author": "",
   "license": "ISC",
