@@ -127,7 +127,7 @@ test.describe(`Checkout`, () => {
     
   });
 
-  test('should not be able to checkout if checkout information is not given', async ({ loginPage, productsPage, cartPage, checkoutInformationPage, checkoutOverviewPage, checkoutCompletePage }) => {
+  test('should not be able to checkout if checkout information is not given', async ({ loginPage, productsPage, cartPage, checkoutInformationPage}) => {
 
     // Test data below
     // Login
