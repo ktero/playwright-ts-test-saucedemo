@@ -17,11 +17,24 @@ test.describe(`Login`, () => {
 
   test('should not be able to login when inputting invalid credentials', async ({ loginPage }) => {
 
-    const username = loginData.InvalidScenario.Username;
-    const password = loginData.InvalidScenario.Password;
-    const isValidLogin = loginData.InvalidScenario.IsValidLogin;
+    const username: string = loginData.InvalidScenario.Username;
+    const password: string = loginData.InvalidScenario.Password;
+    const isValidLogin: boolean = loginData.InvalidScenario.IsValidLogin;
+    const expectedErrorMessage: string = loginData.InvalidScenario.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+  });
+
+  test('should not be able to login when not inputting username or password', async ({ loginPage }) => {
+
+    const username: string = loginData.InvalidScenario_NoInput.Username;
+    const password: string = loginData.InvalidScenario_NoInput.Password;
+    const isValidLogin: boolean = loginData.InvalidScenario_NoInput.IsValidLogin;
+    const expectedErrorMessage: string = loginData.InvalidScenario_NoInput.ExpectedErrorMessage;
+    
+    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
   });
 
 });
