@@ -7,6 +7,13 @@
     "InvalidScenario": {
         "Username": "not_standard_user",
         "Password": "wrong_password",
-        "IsValidLogin": false
+        "IsValidLogin": false,
+        "ExpectedErrorMessage": "Epic sadface: Username and password do not match any user in this service"
+    },
+    "InvalidScenario_NoInput": {
+        "Username": "",
+        "Password": "",
+        "IsValidLogin": false,
+        "ExpectedErrorMessage": "Epic sadface: Username is required"
     }
 }
