@@ -23,12 +23,17 @@ export class LoginPage {
 
     async goto() {
         await this.page.goto('/');
+        await expect(this.page).toHaveURL('https://www.saucedemo.com/');
     }
 
     async performLogin(username: string, password: string, isValidLogin: boolean = true) {
         await this.enterUsername(username);
         await this.enterPassword(password);
         await this.clickLoginButton(isValidLogin);
+    }
+
+    async assertLoginErrorMessage(expectedErrorMessage: string) {
+        await expect(this.loginErrorMessage).toHaveText(expectedErrorMessage);
     }
 
     private async enterUsername(username: string) {
@@ -47,7 +52,6 @@ export class LoginPage {
             await expect(this.homePageTitle).toHaveText('Products');
         } else {
             await expect(this.page).toHaveURL('https://www.saucedemo.com/');
-            await expect(this.loginErrorMessage).toHaveText('Epic sadface: Username and password do not match any user in this service');
         }
     }
 }
