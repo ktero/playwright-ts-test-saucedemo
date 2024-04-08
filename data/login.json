@@ -15,5 +15,17 @@
         "Password": "",
         "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Username is required"
+    },
+    "InvalidScenario_NoUsername": {
+        "Username": "",
+        "Password": "secret_sauce",
+        "IsValidLogin": false,
+        "ExpectedErrorMessage": "Epic sadface: Username is required"
+    },
+    "InvalidScenario_NoPassword": {
+        "Username": "standard_user",
+        "Password": "",
+        "IsValidLogin": false,
+        "ExpectedErrorMessage": "Epic sadface: Password is required"
     }
 }

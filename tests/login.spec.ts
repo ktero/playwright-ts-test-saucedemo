@@ -2,8 +2,6 @@ import { test } from '../fixtures/test-fixture';
 
 import * as loginData from '../data/login.json';
 
-// should be able to remove items in shopping cart and then checkout the remaining items
-
 test.describe(`Login`, () => {
   
   test('should be able to login when inputting valid credentials', async ({ loginPage }) => {
@@ -32,6 +30,28 @@ test.describe(`Login`, () => {
     const password: string = loginData.InvalidScenario_NoInput.Password;
     const isValidLogin: boolean = loginData.InvalidScenario_NoInput.IsValidLogin;
     const expectedErrorMessage: string = loginData.InvalidScenario_NoInput.ExpectedErrorMessage;
+    
+    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+  });
+
+  test('should not be able to login when username is not entered', async ({ loginPage }) => {
+
+    const username: string = loginData.InvalidScenario_NoUsername.Username;
+    const password: string = loginData.InvalidScenario_NoUsername.Password;
+    const isValidLogin: boolean = loginData.InvalidScenario_NoUsername.IsValidLogin;
+    const expectedErrorMessage: string = loginData.InvalidScenario_NoUsername.ExpectedErrorMessage;
+    
+    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+  });
+
+  test('should not be able to login when password is not entered', async ({ loginPage }) => {
+
+    const username: string = loginData.InvalidScenario_NoPassword.Username;
+    const password: string = loginData.InvalidScenario_NoPassword.Password;
+    const isValidLogin: boolean = loginData.InvalidScenario_NoPassword.IsValidLogin;
+    const expectedErrorMessage: string = loginData.InvalidScenario_NoPassword.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
     await loginPage.assertLoginErrorMessage(expectedErrorMessage);
