@@ -57,5 +57,16 @@ test.describe(`Login`, () => {
     await loginPage.assertLoginErrorMessage(expectedErrorMessage);
   });
 
+  test('should not be able to login if user is locked', async ({ loginPage }) => {
+
+    const username: string = loginData.InvalidScenario_LockedOutUser.Username;
+    const password: string = loginData.InvalidScenario_LockedOutUser.Password;
+    const isValidLogin: boolean = loginData.InvalidScenario_LockedOutUser.IsValidLogin;
+    const expectedErrorMessage: string = loginData.InvalidScenario_LockedOutUser.ExpectedErrorMessage;
+    
+    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+  });
+
 });
 
