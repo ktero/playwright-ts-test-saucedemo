@@ -27,5 +27,11 @@
         "Password": "",
         "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Password is required"
+    },
+    "InvalidScenario_LockedOutUser": {
+        "Username": "locked_out_user",
+        "Password": "secret_sauce",
+        "IsValidLogin": false,
+        "ExpectedErrorMessage": "Epic sadface: Sorry, this user has been locked out."
     }
 }
