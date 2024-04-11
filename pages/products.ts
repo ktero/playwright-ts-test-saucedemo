@@ -7,6 +7,7 @@ export class ProductsPage extends NavigationBar {
     // Define locators
     readonly productItem: Locator;
     readonly productItemName: Locator;
+    readonly productSortSelect: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -15,6 +16,7 @@ export class ProductsPage extends NavigationBar {
         // Initialize locators
         this.productItem = this.page.locator('[data-test="inventory-item"]');
         this.productItemName = this.page.locator('[data-test="inventory-item-name"]');
+        this.productSortSelect = this.page.locator('[data-test="product-sort-container"]');
     }
 
     async performAddItemsToCart(itemToAdd: string | string[], addItemsFromProductItemPage: boolean = false) {
@@ -35,6 +37,10 @@ export class ProductsPage extends NavigationBar {
             // Assert total number of items added in the shopping cart
             await this.assertNumberBesideCartIcon(itemCounter);
         }
+    }
+
+    async sortItem(sortAction: string) {
+        await this.productSortSelect.selectOption(sortAction);
     }
 
     private async clickProductItemName(itemName: string) {
