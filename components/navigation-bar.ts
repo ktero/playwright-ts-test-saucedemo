@@ -5,12 +5,28 @@ export class NavigationBar {
 
     // Define locators
     readonly shoppingCartLink: Locator;
+    readonly hamburgerMenuLink: Locator;
+    readonly hamburgerMenuList: Locator;
 
     constructor(page: Page) {
         this.page = page;
 
         // Initialize locators
         this.shoppingCartLink = this.page.locator('[data-test="shopping-cart-link"]');
+        this.hamburgerMenuLink = this.page.locator('#react-burger-menu-btn');
+        this.hamburgerMenuList = this.page.locator('.bm-item-list');
+    }
+
+    async performLogout() {
+        await this.clickHamburgerMenu();
+        await this.hamburgerMenuList.getByRole('link', { name: 'Logout' }).click();
+        await expect(this.page).toHaveURL('https://www.saucedemo.com/');
+    }
+
+    async navigateToAboutPage() {
+        await this.clickHamburgerMenu();
+        await this.hamburgerMenuList.getByRole('link', { name: 'About' }).click();
+        await expect(this.page).toHaveURL('https://saucelabs.com/');
     }
 
     async getNumberBesideCartIcon(): Promise<number> {
@@ -29,5 +45,9 @@ export class NavigationBar {
 
     private async clickShoppingCart() {
         await this.shoppingCartLink.click(); 
+    }
+
+    private async clickHamburgerMenu() {
+        await this.hamburgerMenuLink.click();
     }
 }
