@@ -2,6 +2,7 @@ import { test } from '../fixtures/test-fixture';
 
 import * as loginData from '../data/login.json';
 import * as testData from '../data/test.json';
+import { it } from 'node:test';
 
 test.describe(`Checkout`, () => {
   
@@ -174,6 +175,36 @@ test.describe(`Checkout`, () => {
     await checkoutInformationPage.performFillUpCheckoutInformation(firstName, lastName, "");
     await checkoutInformationPage.navigateToCheckoutOverViewPage(false);
     await checkoutInformationPage.assertErrorMessage(noPostalOrZipCode);
+  });
+
+  test('should be able to navigate to About page', async ({ loginPage, productsPage }) => {
+
+    // Test data below
+    // Login
+    const username: string = loginData.ValidScenario.Username;
+    const password: string = loginData.ValidScenario.Password;
+    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
+  
+    await loginPage.goto();
+    await loginPage.performLogin(username, password, isValidLogin);
+
+    // Navigate to About page
+    await productsPage.navigateToAboutPage();
+  });
+
+  test('should be able to logout', async ({ loginPage, productsPage }) => {
+
+    // Test data below
+    // Login
+    const username: string = loginData.ValidScenario.Username;
+    const password: string = loginData.ValidScenario.Password;
+    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
+  
+    await loginPage.goto();
+    await loginPage.performLogin(username, password, isValidLogin);
+
+    // Logout from the application
+    await productsPage.performLogout();
   });
 
 });
