@@ -4,11 +4,11 @@ export class LoginPage {
     readonly page: Page;
 
     // Define locators
-    readonly usernameField: Locator;
-    readonly passwordField: Locator;
-    readonly loginButton: Locator;
-    readonly homePageTitle: Locator;
-    readonly loginErrorMessage: Locator;
+    private readonly usernameField: Locator;
+    private readonly passwordField: Locator;
+    private readonly loginButton: Locator;
+    private readonly homePageTitle: Locator;
+    private readonly loginErrorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -32,8 +32,8 @@ export class LoginPage {
         await this.clickLoginButton(isValidLogin);
     }
 
-    async assertLoginErrorMessage(expectedErrorMessage: string) {
-        await expect(this.loginErrorMessage).toHaveText(expectedErrorMessage);
+    async getLoginErrorMessage(): Promise<string> {
+        return await this.loginErrorMessage.innerText();
     }
 
     private async enterUsername(username: string) {
