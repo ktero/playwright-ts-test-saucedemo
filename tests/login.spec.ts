@@ -22,8 +22,8 @@ test.describe(`Login`, () => {
     
     await loginPage.performLogin(username, password, isValidLogin);
 
-    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
-    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
   test('should not be able to login when not inputting username or password', async ({ loginPage }) => {
@@ -35,8 +35,8 @@ test.describe(`Login`, () => {
     
     await loginPage.performLogin(username, password, isValidLogin);
 
-    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
-    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
   test('should not be able to login when username is not entered', async ({ loginPage }) => {
@@ -48,8 +48,8 @@ test.describe(`Login`, () => {
     
     await loginPage.performLogin(username, password, isValidLogin);
 
-    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
-    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
   test('should not be able to login when password is not entered', async ({ loginPage }) => {
@@ -61,8 +61,8 @@ test.describe(`Login`, () => {
     
     await loginPage.performLogin(username, password, isValidLogin);
 
-    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
-    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
   test('should not be able to login if user is locked', async ({ loginPage }) => {
@@ -74,8 +74,8 @@ test.describe(`Login`, () => {
     
     await loginPage.performLogin(username, password, isValidLogin);
 
-    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
-    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
 });
