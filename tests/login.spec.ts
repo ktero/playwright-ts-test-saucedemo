@@ -1,4 +1,4 @@
-import { test } from '../fixtures/test-fixture';
+import { test, expect } from '../fixtures/test-fixture';
 
 import * as loginData from '../data/login.json';
 
@@ -21,7 +21,9 @@ test.describe(`Login`, () => {
     const expectedErrorMessage: string = loginData.InvalidScenario.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
-    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+
+    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
+    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
   });
 
   test('should not be able to login when not inputting username or password', async ({ loginPage }) => {
@@ -32,7 +34,9 @@ test.describe(`Login`, () => {
     const expectedErrorMessage: string = loginData.InvalidScenario_NoInput.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
-    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+
+    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
+    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
   });
 
   test('should not be able to login when username is not entered', async ({ loginPage }) => {
@@ -43,7 +47,9 @@ test.describe(`Login`, () => {
     const expectedErrorMessage: string = loginData.InvalidScenario_NoUsername.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
-    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+
+    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
+    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
   });
 
   test('should not be able to login when password is not entered', async ({ loginPage }) => {
@@ -54,7 +60,9 @@ test.describe(`Login`, () => {
     const expectedErrorMessage: string = loginData.InvalidScenario_NoPassword.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
-    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+
+    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
+    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
   });
 
   test('should not be able to login if user is locked', async ({ loginPage }) => {
@@ -65,7 +73,9 @@ test.describe(`Login`, () => {
     const expectedErrorMessage: string = loginData.InvalidScenario_LockedOutUser.ExpectedErrorMessage;
     
     await loginPage.performLogin(username, password, isValidLogin);
-    await loginPage.assertLoginErrorMessage(expectedErrorMessage);
+
+    let actualErrorMessage: string = await loginPage.getLoginErrorMessage();
+    await expect(actualErrorMessage).toEqual(expectedErrorMessage);
   });
 
 });
