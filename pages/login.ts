@@ -32,7 +32,16 @@ export class LoginPage {
         await this.clickLoginButton(isValidLogin);
     }
 
-    async getLoginErrorMessage(): Promise<string> {
+    async assertLoginErrorIsDisplay() {
+        await expect (this.loginErrorMessage).toBeVisible();
+    }
+
+    async assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage: string) {
+        let actualErrorMessage: string = await this.getLoginErrorMessage();
+        await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    }
+
+    private async getLoginErrorMessage(): Promise<string> {
         return await this.loginErrorMessage.innerText();
     }
 
