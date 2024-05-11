@@ -1,7 +1,8 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 
 export class LoginPage {
-    readonly page: Page;
+    private readonly page: Page;
+    private baseUrl: string;
 
     // Define locators
     private readonly usernameField: Locator;
@@ -12,6 +13,7 @@ export class LoginPage {
 
     constructor(page: Page) {
         this.page = page;
+        this.baseUrl = "";
 
         // Initialize locators
         this.usernameField = page.locator('[data-test="username"]')
@@ -23,13 +25,14 @@ export class LoginPage {
 
     async goto() {
         await this.page.goto('/');
+        this.baseUrl = await this.page.url();
         await expect(this.page).toHaveURL('https://www.saucedemo.com/');
     }
 
-    async performLogin(username: string, password: string, isValidLogin: boolean = true) {
+    async performLogin(username: string, password: string) {
         await this.enterUsername(username);
         await this.enterPassword(password);
-        await this.clickLoginButton(isValidLogin);
+        await this.clickLoginButton();
     }
 
     async assertLoginErrorIsDisplay() {
@@ -39,6 +42,15 @@ export class LoginPage {
     async assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage: string) {
         let actualErrorMessage: string = await this.getLoginErrorMessage();
         await expect(actualErrorMessage).toEqual(expectedErrorMessage);
+    }
+
+    async assertLoginIsSuccessful() {
+        await expect(this.page).toHaveURL(/.*inventory.html/);
+        await expect(this.homePageTitle).toHaveText('Products');
+    }
+
+    async assertLoginIsUnsuccessful() {
+        await expect(this.page).toHaveURL(this.baseUrl);
     }
 
     private async getLoginErrorMessage(): Promise<string> {
@@ -53,14 +65,7 @@ export class LoginPage {
         await this.passwordField.fill(password);
     }
 
-    private async clickLoginButton(isValidLogin: boolean) {
+    private async clickLoginButton() {
         await this.loginButton.click();
-
-        if (isValidLogin) {
-            await expect(this.page).toHaveURL(/.*inventory.html/);
-            await expect(this.homePageTitle).toHaveText('Products');
-        } else {
-            await expect(this.page).toHaveURL('https://www.saucedemo.com/');
-        }
     }
 }

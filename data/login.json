@@ -1,37 +1,31 @@
 {
     "ValidScenario": {
         "Username": "standard_user",
-        "Password": "secret_sauce",
-        "IsValidLogin": true
+        "Password": "secret_sauce"
     },
     "InvalidScenario": {
         "Username": "not_standard_user",
         "Password": "wrong_password",
-        "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Username and password do not match any user in this service"
     },
     "InvalidScenario_NoInput": {
         "Username": "",
         "Password": "",
-        "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Username is required"
     },
     "InvalidScenario_NoUsername": {
         "Username": "",
         "Password": "secret_sauce",
-        "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Username is required"
     },
     "InvalidScenario_NoPassword": {
         "Username": "standard_user",
         "Password": "",
-        "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Password is required"
     },
     "InvalidScenario_LockedOutUser": {
         "Username": "locked_out_user",
         "Password": "secret_sauce",
-        "IsValidLogin": false,
         "ExpectedErrorMessage": "Epic sadface: Sorry, this user has been locked out."
     }
 }
