@@ -26,13 +26,17 @@ export class LoginPage {
     async goto() {
         await this.page.goto('/');
         this.baseUrl = await this.page.url();
-        await expect(this.page).toHaveURL('https://www.saucedemo.com/');
+        await this.assertIsAtBasePage();
     }
 
     async performLogin(username: string, password: string) {
         await this.enterUsername(username);
         await this.enterPassword(password);
         await this.clickLoginButton();
+    }
+
+    async assertIsAtBasePage() {
+        await expect(this.page).toHaveURL(this.baseUrl);
     }
 
     async assertLoginErrorIsDisplay() {
