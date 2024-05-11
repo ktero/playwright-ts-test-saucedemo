@@ -2,7 +2,6 @@ import { test } from '../fixtures/test-fixture';
 
 import * as loginData from '../data/login.json';
 import * as testData from '../data/test.json';
-import { it } from 'node:test';
 
 test.describe(`Checkout`, () => {
   
@@ -12,7 +11,6 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
 
     // Items to add
     const items: string | string[] = testData.Test1.ItemsToAdd;
@@ -27,7 +25,7 @@ test.describe(`Checkout`, () => {
     const expectedCompleteText: string = testData.Test1.ExpectedCheckoutCompleteMessage.Text;
   
     // await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -51,7 +49,6 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
 
     // Items to add
     const items: string | string[] = testData.Test2.ItemsToAdd;
@@ -68,7 +65,7 @@ test.describe(`Checkout`, () => {
     const expectedCompleteText: string = testData.Test2.ExpectedCheckoutCompleteMessage.Text;
   
     await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -94,7 +91,6 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
 
     // Items to add
     const items: string | string[] = testData.Test3.ItemsToAdd;
@@ -109,7 +105,7 @@ test.describe(`Checkout`, () => {
     const expectedCompleteText: string = testData.Test3.ExpectedCheckoutCompleteMessage.Text;
 
     await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     await productsPage.performAddItemsToCart(items, true);
     await productsPage.navigateToCartPage();
@@ -134,7 +130,6 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
 
     // Items to add
     const items: string | string[] = testData.Test1.ItemsToAdd;
@@ -151,7 +146,7 @@ test.describe(`Checkout`, () => {
     const noPostalOrZipCode: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoPostalOrZipCode;
   
     await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -183,10 +178,9 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
   
     await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     // Navigate to About page
     await productsPage.navigateToAboutPage();
@@ -198,10 +192,9 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-    const isValidLogin: boolean = loginData.ValidScenario.IsValidLogin;
   
     await loginPage.goto();
-    await loginPage.performLogin(username, password, isValidLogin);
+    await loginPage.performLogin(username, password);
 
     // Logout from the application
     await productsPage.performLogout();
