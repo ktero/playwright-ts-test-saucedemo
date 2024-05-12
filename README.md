@@ -1,7 +1,6 @@
-## Using Playwright with Typescript to automate test in SauceDemo
+# Using Playwright with Typescript to automate test in SauceDemo
 
-### Purpose
-I do not own SauceDemo. Website is owned by Sauce Labs. I am only using the website to practice and apply my knowledge on automation tools/frameworks.
+<p>I do not own SauceDemo. Website is owned by Sauce Labs. I am only using the website to practice and apply my knowledge on automation tools/frameworks.</p>
 
 ### Login Tests
 
@@ -22,3 +21,14 @@ I do not own SauceDemo. Website is owned by Sauce Labs. I am only using the webs
 | 2           | should be able to remove items in shopping cart and then checkout the remaining items   |
 | 3           | should be able to checkout item if added from item page                                 |
 | 4           | should not be able to checkout if checkout information is not given                     |
+
+
+### Run the Playwright test in Docker
+---
+```bash
+docker build -t {name_of_your_playwright_test_image} .
+docker run -it {name_of_your_playwright_test_image} npm run test
+```
+---
+
+<p>Note: As of this writing (May 12, 2024), I am still a beginner in using Docker and I am still learning the tool and learning for ways on how to utilize it for software development and testing.</p>
