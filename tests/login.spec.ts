@@ -22,7 +22,7 @@ test.describe(`Login`, () => {
     await loginPage.performLogin(username, password);
 
     await loginPage.assertLoginIsUnsuccessful();
-    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertLoginErrorIsDisplayed();
     await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
@@ -35,7 +35,7 @@ test.describe(`Login`, () => {
     await loginPage.performLogin(username, password);
 
     await loginPage.assertLoginIsUnsuccessful();
-    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertLoginErrorIsDisplayed();
     await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
@@ -48,7 +48,7 @@ test.describe(`Login`, () => {
     await loginPage.performLogin(username, password);
 
     await loginPage.assertLoginIsUnsuccessful();
-    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertLoginErrorIsDisplayed();
     await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
@@ -61,7 +61,7 @@ test.describe(`Login`, () => {
     await loginPage.performLogin(username, password);
 
     await loginPage.assertLoginIsUnsuccessful();
-    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertLoginErrorIsDisplayed();
     await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
@@ -74,7 +74,7 @@ test.describe(`Login`, () => {
     await loginPage.performLogin(username, password);
 
     await loginPage.assertLoginIsUnsuccessful();
-    await loginPage.assertLoginErrorIsDisplay();
+    await loginPage.assertLoginErrorIsDisplayed();
     await loginPage.assertActualLoginErrorMessageMatchesExpectedErrorMessage(expectedErrorMessage);
   });
 
