@@ -23,9 +23,9 @@ test.describe(`Checkout`, () => {
     // Expected messages in Complete Checkout page
     const expectedCompleteHeader: string = testData.Test1.ExpectedCheckoutCompleteMessage.Header;
     const expectedCompleteText: string = testData.Test1.ExpectedCheckoutCompleteMessage.Text;
-  
-    // await loginPage.goto();
+
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -64,8 +64,8 @@ test.describe(`Checkout`, () => {
     const expectedCompleteHeader: string = testData.Test2.ExpectedCheckoutCompleteMessage.Header;
     const expectedCompleteText: string = testData.Test2.ExpectedCheckoutCompleteMessage.Text;
   
-    await loginPage.goto();
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -104,8 +104,8 @@ test.describe(`Checkout`, () => {
     const expectedCompleteHeader: string = testData.Test3.ExpectedCheckoutCompleteMessage.Header;
     const expectedCompleteText: string = testData.Test3.ExpectedCheckoutCompleteMessage.Text;
 
-    await loginPage.goto();
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     await productsPage.performAddItemsToCart(items, true);
     await productsPage.navigateToCartPage();
@@ -145,8 +145,8 @@ test.describe(`Checkout`, () => {
     const noLastName: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoLastName;
     const noPostalOrZipCode: string = testData.Test4.ExpectedCheckoutInformationErrorMessages.NoPostalOrZipCode;
   
-    await loginPage.goto();
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     await productsPage.performAddItemsToCart(items);
     await productsPage.navigateToCartPage();
@@ -179,8 +179,8 @@ test.describe(`Checkout`, () => {
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
   
-    await loginPage.goto();
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     // Navigate to About page
     await productsPage.navigateToAboutPage();
@@ -192,9 +192,9 @@ test.describe(`Checkout`, () => {
     // Login
     const username: string = loginData.ValidScenario.Username;
     const password: string = loginData.ValidScenario.Password;
-  
-    await loginPage.goto();
+    
     await loginPage.performLogin(username, password);
+    await loginPage.assertLoginIsSuccessful();
 
     // Logout from the application
     await productsPage.performLogout();

@@ -39,7 +39,7 @@ export class LoginPage {
         await expect(this.page).toHaveURL(this.baseUrl);
     }
 
-    async assertLoginErrorIsDisplay() {
+    async assertLoginErrorIsDisplayed() {
         await expect (this.loginErrorMessage).toBeVisible();
     }
 
