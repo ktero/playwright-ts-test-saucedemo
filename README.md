@@ -30,5 +30,3 @@ docker build -t {name_of_your_playwright_test_image} .
 docker run -it {name_of_your_playwright_test_image} npm run test
 ```
 ---
-
-<p>Note: As of this writing (May 12, 2024), I am still a beginner in using Docker and I am still learning the tool and learning for ways on how to utilize it for software development and testing.</p>
