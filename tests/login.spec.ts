@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/test-fixture';
+import { test } from '../fixtures/test-fixture';
 
 import * as loginData from '../data/login.json';
 
